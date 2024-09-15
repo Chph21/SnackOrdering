@@ -1,5 +1,5 @@
 package com.example.snackordering.enums;
 
-public enum AccountRole {
-    ADMIN, USER
+public enum TokenType {
+    ACCESS, REFRESH
 }
