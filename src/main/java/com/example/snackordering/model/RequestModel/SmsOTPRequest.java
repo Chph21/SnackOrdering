@@ -12,13 +12,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterRequest {
+public class SmsOTPRequest {
     @NotNull(message = "can not be null")
     @NotBlank(message = "can not be blank")
     @Pattern(regexp = "^\\+84\\d{9}$", message = "invalid phone number format")
     private String phone;
 
-    @NotNull(message = "can not be null")
-    @NotBlank(message = "can not be blank")
-    private String password;
+    private String otp;
 }

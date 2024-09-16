@@ -34,10 +34,10 @@ public class AccountEntity {
     @Column(name = "last_name", length = 20)
     private String lastName;
 
-    @Column(name = "email", length = 50, nullable = false, unique = true)
+    @Column(name = "email", length = 50, unique = true)
     private String email;
 
-    @Column(name = "phone", length = 20, unique = true)
+    @Column(name = "phone", length = 20, nullable = false, unique = true)
     private String phone;
 
     @Column(name = "address", length = 20)

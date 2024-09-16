@@ -32,7 +32,9 @@ public class SecurityConfig {
                                         "/account/register",
                                         "/account/login",
                                         "/account/logout",
-                                        "/account/refresh-token"
+                                        "/account/refresh-token",
+                                        "/account/generate-sms-otp",
+                                        "/account/verify-sms-otp"
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 )
