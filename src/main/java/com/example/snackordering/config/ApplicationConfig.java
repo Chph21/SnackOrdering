@@ -39,7 +39,7 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return email -> authRepository.findByEmail(email)
+        return phone -> authRepository.findByPhone(phone)
                 .orElseThrow(() -> new UsernameNotFoundException("Account not found"));
     }
 

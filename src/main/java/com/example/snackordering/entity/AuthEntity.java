@@ -19,8 +19,8 @@ import java.util.List;
 public class AuthEntity implements UserDetails {
 
     @Id
-    @Column(name = "email", length = 50, nullable = false)
-    private String email;
+    @Column(name = "phone", length = 50, nullable = false)
+    private String phone;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -49,7 +49,7 @@ public class AuthEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return phone;
     }
 
     @Override

@@ -6,7 +6,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.antlr.v4.runtime.Token;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,7 @@ public class JwtService {
     @Value("${spring.application.security.jwt.refresh_token.expiration}")
     private Long jwtRefreshTokenExpiration;
 
-    public String extractUserEmail(String token, TokenType tokenType) {
+    public String extractUserName(String token, TokenType tokenType) {
         return extractClaim(token, Claims::getSubject, tokenType);
     }
 //    public String extractUserRole(String token) {
@@ -40,13 +39,13 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateAccessToken(Map<String, Object> extraClaims, String userEmail, String role) {
+    public String generateAccessToken(Map<String, Object> extraClaims, String userName, String role) {
         extraClaims.put("role", role);
-        return buildToken(extraClaims, userEmail, jwtTokenExpiration, getAccessSecretKey());
+        return buildToken(extraClaims, userName, jwtTokenExpiration, getAccessSecretKey());
     }
 
-    public String generateRefreshToken(String userEmail) {
-        return buildToken(new HashMap<>(), userEmail, jwtRefreshTokenExpiration, getRefreshSecretKey());
+    public String generateRefreshToken(String userName) {
+        return buildToken(new HashMap<>(), userName, jwtRefreshTokenExpiration, getRefreshSecretKey());
     }
 
     private String buildToken(Map<String, Object> extraClaims, String subject, long expiration, Key secretKey) {
@@ -90,8 +89,8 @@ public class JwtService {
     }
 
     public Boolean isTokenValid(String token, UserDetails userDetails, TokenType tokenType) {
-        final String userEmail = extractUserEmail(token, tokenType);
-        return (userEmail.equals(userDetails.getUsername()) && !isTokenExpired(token, tokenType));
+        final String userName = extractUserName(token, tokenType);
+        return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token, tokenType));
     }
 
     public boolean isTokenExpired(String token, TokenType tokenType) {

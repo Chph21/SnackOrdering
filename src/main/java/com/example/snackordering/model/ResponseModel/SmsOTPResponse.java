@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterResponse {
-    private Long id;
+public class SmsOTPResponse {
     private String phone;
+    private String status;
+    private String message;
 }

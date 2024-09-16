@@ -9,6 +9,10 @@ spring:
         refresh_token:
           secret: 85ec7a7e649be00c51fe797ae418fc06aa5fc0a80f90afa674eac1a8521e0832
           expiration: 604800000
+      sms-otp:
+        twilio-account-sid:
+        twilio-auth-token:
+        twilio-service-sid:
   datasource:
     url: jdbc:mysql://localhost:3306/snack_ordering
     username: root
