@@ -43,8 +43,9 @@ public class AccountEntity {
     @Column(name = "address", length = 20)
     private String address;
 
-    @Column(name = "branch_id", length = 20, unique = true)
-    private String branchId;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "branch_id", unique = true)
+    private Branch branch;
 
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
