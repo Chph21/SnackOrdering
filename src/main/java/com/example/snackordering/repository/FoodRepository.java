@@ -9,5 +9,4 @@ public interface FoodRepository extends JpaRepository<Food, Integer> {
 
     Food findByFoodId(Integer foodId);
 
-    List<Food> findByAvailable(boolean status);
 }

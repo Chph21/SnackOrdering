@@ -1,7 +1,5 @@
 package com.example.snackordering.entity;
 
-import com.example.snackordering.entity.BranchFood;
-import com.example.snackordering.entity.Order;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
