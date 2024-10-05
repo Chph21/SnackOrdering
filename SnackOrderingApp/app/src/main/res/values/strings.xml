@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SnackOrderingApp</string>
+    <!--    <string name="app_name">Đặt Đồ Ăn Vặt</string>-->
+    <string name="search">Tìm kiếm</string>
+    <string name="search_hint">Nhập tên món ăn...</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="add_to_cart">Thêm vào giỏ hàng</string>
+    <string name="checkout">Thanh toán</string>
+    <string name="order_summary">Tổng quan đơn hàng</string>
+    <string name="delivery_address">Địa chỉ giao hàng</string>
+    <string name="place_order">Đặt hàng</string>
+    <string name="order_history">Lịch sử đơn hàng</string>
+</resources>
