@@ -35,11 +35,11 @@ public class SnackOrderingApplication implements CommandLineRunner {
                     .firstName("Admin")
                     .lastName("Admin")
                     .email(adminEmail)
-                    .phone("0123456789")
+                    .phone("+84123456789")
                     .build();
 
             AuthEntity auth = AuthEntity.builder()
-                    .phone("0123456789")
+                    .phone("+84123456789")
                     .password(passwordEncoder.encode("admin"))
                     .role(AccountRole.ADMIN)
                     .isEnable(true)
