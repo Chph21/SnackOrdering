@@ -10,4 +10,6 @@
     <string name="delivery_address">Địa chỉ giao hàng</string>
     <string name="place_order">Đặt hàng</string>
     <string name="order_history">Lịch sử đơn hàng</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

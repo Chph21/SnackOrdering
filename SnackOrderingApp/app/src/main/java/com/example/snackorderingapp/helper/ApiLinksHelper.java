@@ -12,6 +12,10 @@ public class ApiLinksHelper {
     public static String registerUri(){
         return BASE_URL + "account/register";
     }
+
+    public static String getUserInfoUri(String phone){
+        return BASE_URL + "account/phone/" + phone;
+    }
     public static String generateOtpUri(){
         return BASE_URL + "account/generate-sms-otp";
     }
