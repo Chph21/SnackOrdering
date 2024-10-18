@@ -48,6 +48,16 @@ public class AccountService {
         return account.map(this::accountResponseGenerator).get();
     }
 
+    public AccountResponse findByPhone(String phone) {
+        LOGGER.info("Find account with phone number: " + phone);
+        Optional<AccountEntity> account = accountRepository.findByPhone(phone);
+        if (account.isEmpty()) {
+            LOGGER.warn("No account was found with phone number: " + phone);
+            return null;
+        }
+        return account.map(this::accountResponseGenerator).get();
+    }
+
     public AccountResponse save(AccountRequest accountRequest) {
         AccountEntity account;
         if (accountRequest.getBranchId() != null) {
