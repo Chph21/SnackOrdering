@@ -40,6 +40,14 @@ public class AccountController {
                 "Object fetched successfully");
     }
 
+    @GetMapping("/phone/{phone}")
+    public ResponseEntity<ResponseDTO> getByPhone(@PathVariable String phone) {
+        AccountResponse result = accountService.findByPhone(phone);
+        return ResponseUtil.getObject(result,
+                HttpStatus.OK,
+                "Account fetched successfully");
+    }
+
     @PutMapping
     public ResponseEntity<ResponseDTO> update(@Valid @RequestBody AccountRequest request) {
         AccountResponse result = accountService.save(request);

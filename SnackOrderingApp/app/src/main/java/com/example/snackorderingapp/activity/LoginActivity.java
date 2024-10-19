@@ -3,6 +3,7 @@ package com.example.snackorderingapp.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -78,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void goToMainIfAuthenticated(){
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
         startActivity(intent);
         // DISPLAY SUCCESS MESSAGE IF AUTHENTICATED:
         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_LONG).show();
@@ -89,26 +90,34 @@ public class LoginActivity extends AppCompatActivity {
         String formattedPhone = loginValidator.getFormattedPhoneNumber();
 
         // SET USER DATA MAP OBJECT:
-        HashMap<String, String> params = new HashMap<String, String>();
+        HashMap<String, String> params = new HashMap<>();
         params.put("phone", formattedPhone);
         params.put("password", password);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, ApiLinksHelper.autenticateUri(), new JSONObject(params),
                 response -> {
-                    System.out.println(response.toString());
-                    // INITIATE PREFERENCES:
                     preferences = getSharedPreferences(StringResourceHelper.getAuthTokenPref(), MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     try {
-                        editor.putString("access_token", response.getString("access_token"));
-                        editor.putString("refresh_token", response.getString("refresh_token"));
+                        String accessToken = response.getString("access_token");
+                        String refreshToken = response.getString("refresh_token");
+
+                        // Decode the access token and extract user ID
+                        String userId = decodeAccessToken(accessToken);
+
+                        // Save tokens and user ID to SharedPreferences
+                        editor.putString("access_token", accessToken);
+                        editor.putString("refresh_token", refreshToken);
+                        editor.putString("phone", userId);
                         editor.putBoolean("authenticated", true);
                         editor.apply();
-                        // REDIRECT TO MAIN IF AUTHENTICATED:
-                        goToMainIfAuthenticated();
+
+                        // Redirect to ProfileActivity
+                        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                        finish();
                     } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(LoginActivity.this, "Error processing response: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        // Handle exception
                     }
                 },
                 error -> {
@@ -174,6 +183,21 @@ public class LoginActivity extends AppCompatActivity {
         // END OF ON CLICK METHOD.
         txtGoToSignIn.setOnClickListener(v -> goToRegister());
         // END OF GO TO REGISTER ON CLICK LISTENER METHOD.
+    }
+
+    private String decodeAccessToken(String accessToken) {
+        // Implement JWT decoding logic here
+        // For simplicity, let's assume the token is base64 encoded and contains a "sub" claim with the user ID
+        String[] parts = accessToken.split("\\.");
+        String payload = new String(Base64.decode(parts[1], Base64.DEFAULT));
+        try {
+            JSONObject jsonPayload = new JSONObject(payload);
+            System.out.println(jsonPayload);
+            return jsonPayload.getString("sub");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return ""; // Return an invalid user ID if decoding fails
+        }
     }
 
 }

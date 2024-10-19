@@ -50,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Số điện thoại"
                 android:inputType="phone"
-                android:paddingStart="36dp"/>
+                android:paddingStart="48dp"
+                tools:ignore="RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -69,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Mật khẩu"
                 android:inputType="textPassword"
-                android:paddingStart="36dp" />
+                android:paddingStart="48dp"
+                tools:ignore="RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
