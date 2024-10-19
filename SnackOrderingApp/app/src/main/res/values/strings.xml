@@ -10,4 +10,12 @@
     <string name="delivery_address">Địa chỉ giao hàng</string>
     <string name="place_order">Đặt hàng</string>
     <string name="order_history">Lịch sử đơn hàng</string>
+    <string name="manager">Manager</string>
+    <string name="manager_branch">manager Branch</string>
+    <string name="search_user">Search User</string>
+    <string name="update">Update</string>
+    <string name="manage_order">Manage Order</string>
+    <string name="price">Price</string>
+    <string name="manage_branch">Manage Branch</string>
+    <string name="manage_snack">Manage Snack</string>
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Main gradient background -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#FF0099CC"
+            android:centerColor="#FF33B5E5"
+            android:endColor="#FFAA66CC"
+            android:angle="135"/>
+        </shape>
+    </item>
+
+    <!-- Add a semi-transparent overlay for a soft glowing effect -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#80FFFFFF"/>
+        </shape>
+    </item>
+</layer-list>
