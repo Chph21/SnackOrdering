@@ -12,7 +12,7 @@
         android:id="@+id/tvManager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/Wonderful"
+        android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.1"
         android:shadowColor="#AA000000"
         android:shadowDx="3"
@@ -32,6 +32,7 @@
         tools:ignore="HardcodedText" />
 
     <LinearLayout
+        android:id="@+id/tvCategoryId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
