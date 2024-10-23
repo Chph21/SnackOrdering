@@ -12,12 +12,12 @@
     <string name="order_history">Lịch sử đơn hàng</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="manager">Manager</string>
-    <string name="manager_branch">manager Branch</string>
+    <string name="manager">manager</string>
+    <string name="manager_branch">manager branch</string>
     <string name="search_user">Search User</string>
     <string name="update">Update</string>
-    <string name="manage_order">Manage Order</string>
+    <string name="manage_order">manage order</string>
     <string name="price">Price</string>
-    <string name="manage_branch">Manage Branch</string>
-    <string name="manage_snack">Manage Snack</string>
+    <string name="manage_branch">manage branch</string>
+    <string name="manage_snack">manage snack</string>
 </resources>

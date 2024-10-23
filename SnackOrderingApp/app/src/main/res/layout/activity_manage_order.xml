@@ -13,7 +13,7 @@
         android:id="@+id/tvManager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/Wonderful"
+        android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.1"
         android:shadowColor="#AA000000"
         android:shadowDx="3"

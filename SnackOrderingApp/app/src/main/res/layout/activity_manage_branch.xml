@@ -13,7 +13,7 @@
         android:id="@+id/tvManager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/Wonderful"
+        android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.1"
         android:shadowColor="#AA000000"
         android:shadowDx="3"
@@ -23,12 +23,10 @@
         android:textColor="@android:color/black"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <LinearLayout
@@ -37,9 +35,11 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="202dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvManager"
+        app:layout_constraintVertical_bias="0.04"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-16dp">
 
 
         <!-- Branch Name -->
@@ -62,6 +62,7 @@
             android:textSize="14sp" />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/btnAddBranch"
         android:layout_width="wrap_content"
