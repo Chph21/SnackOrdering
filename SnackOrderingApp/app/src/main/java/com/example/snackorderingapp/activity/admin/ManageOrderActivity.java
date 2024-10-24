@@ -24,6 +24,7 @@ import com.example.snackorderingapp.adapter.OrdersAdapter;
 import com.example.snackorderingapp.helper.ApiLinksHelper;
 import com.example.snackorderingapp.helper.StringResourceHelper;
 import com.example.snackorderingapp.model.Order;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
@@ -36,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ManageOrderActivity extends AppCompatActivity {
+    private MaterialToolbar toolbar;
 
     private RecyclerView ordersRecyclerView;
     private OrdersAdapter ordersAdapter;
@@ -51,7 +53,8 @@ public class ManageOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_order);
-
+        toolbar = findViewById(R.id.toolbar);
+        setupToolbar();
         ordersRecyclerView = findViewById(R.id.ordersRecyclerView);
         ordersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -226,6 +229,15 @@ public class ManageOrderActivity extends AppCompatActivity {
         };
 
         mRequestQueue.add(refreshRequest);
+    }
+
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Order Management");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
 

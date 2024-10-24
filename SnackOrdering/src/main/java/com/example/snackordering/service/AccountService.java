@@ -60,13 +60,13 @@ public class AccountService {
 
     public AccountResponse save(AccountRequest accountRequest) {
         AccountEntity account;
-        if (accountRequest.getBranchId() != null) {
-            Optional<Branch> branch = branchRepository.findById(accountRequest.getBranchId());
-            if (branch.isEmpty()) {
-                LOGGER.error("Branch with id " + accountRequest.getBranchId() + " not found!");
-                throw new CustomValidationException(List.of("Branch not found!"));
-            }
-        }
+//        if (accountRequest.getBranchId() != null) {
+//            Optional<Branch> branch = branchRepository.findById(accountRequest.getBranchId());
+//            if (branch.isEmpty()) {
+//                LOGGER.error("Branch with id " + accountRequest.getBranchId() + " not found!");
+//                throw new CustomValidationException(List.of("Branch not found!"));
+//            }
+//        }
 
         if (accountRequest.getAccountId() != null) {
             LOGGER.info("Update account with id " + accountRequest.getAccountId());

@@ -38,5 +38,11 @@ public class ApiLinksHelper {
     public static String getUserByIdUri(Integer userId) {
         return BASE_URL + "account/" + userId;
     }
+    public static String getUsersUri() {
+        return BASE_URL + "account";
+    }
+    public static String updateUserUri() {
+        return BASE_URL + "account";
+    }
 }
 // END OF API LINKS HELPER CLASS.
