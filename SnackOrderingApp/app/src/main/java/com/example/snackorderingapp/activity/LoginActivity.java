@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.snackorderingapp.MyVolleySingletonUtil;
 import com.example.snackorderingapp.R;
+import com.example.snackorderingapp.activity.admin.ManageActivity;
 import com.example.snackorderingapp.helper.ApiLinksHelper;
 import com.example.snackorderingapp.helper.LoginFormValidationHelper;
 import com.example.snackorderingapp.helper.StringResourceHelper;
@@ -101,21 +102,30 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         String accessToken = response.getString("access_token");
                         String refreshToken = response.getString("refresh_token");
-
-                        // Decode the access token and extract user ID
-                        String userId = decodeAccessToken(accessToken);
+                        // Decode the access token and extract user ID and role
+                        String[] decodedValues = decodeAccessToken(accessToken);
+                        String userId = decodedValues[0];
+                        String role = decodedValues[1];
 
                         // Save tokens and user ID to SharedPreferences
                         editor.putString("access_token", accessToken);
                         editor.putString("refresh_token", refreshToken);
                         editor.putString("phone", userId);
+                        editor.putString("role", role); // Save the role to SharedPreferences
                         editor.putBoolean("authenticated", true);
                         editor.apply();
-
-                        // Redirect to ProfileActivity
-                        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                        startActivity(intent);
-                        finish();
+                        System.out.println(role);
+                        if (role.equals("USER")) {
+                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else if (role.equals("ADMIN")) {
+                            Intent intent = new Intent(LoginActivity.this, ManageActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Invalid role", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         // Handle exception
                     }
@@ -185,18 +195,17 @@ public class LoginActivity extends AppCompatActivity {
         // END OF GO TO REGISTER ON CLICK LISTENER METHOD.
     }
 
-    private String decodeAccessToken(String accessToken) {
-        // Implement JWT decoding logic here
-        // For simplicity, let's assume the token is base64 encoded and contains a "sub" claim with the user ID
+    private String[] decodeAccessToken(String accessToken) {
         String[] parts = accessToken.split("\\.");
         String payload = new String(Base64.decode(parts[1], Base64.DEFAULT));
         try {
             JSONObject jsonPayload = new JSONObject(payload);
-            System.out.println(jsonPayload);
-            return jsonPayload.getString("sub");
+            String userId = jsonPayload.getString("sub");
+            String role = jsonPayload.getString("role");
+            return new String[] {userId, role};
         } catch (JSONException e) {
             e.printStackTrace();
-            return ""; // Return an invalid user ID if decoding fails
+            return new String[] {"", ""}; // Return invalid values if decoding fails
         }
     }
 
