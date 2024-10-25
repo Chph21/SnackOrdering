@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,97 +9,122 @@
     android:background="@drawable/gradient_background"
     tools:context=".activity.admin.ManageActivity">
 
-    <TextView
-        android:id="@+id/tvManager"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/tvManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/manager"
+            android:textSize="50sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@android:color/black"
+             android:textStyle="bold"
+            android:shadowColor="#AA000000"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:letterSpacing="0.1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.293"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Button
+            android:id="@+id/btnBranch"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="372dp"
+            android:text="User"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/rounded_button"
+            app:layout_constraintEnd_toStartOf="@+id/btnOrder"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnOrder"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="372dp"
+            android:text="Order"
+            android:textColor="@android:color/white"
+            android:background="@drawable/rounded_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnSnack"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="96dp"
+            android:text="Snack"
+            android:textColor="@android:color/white"
+            android:background="@drawable/rounded_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.59"
+            app:layout_constraintStart_toEndOf="@+id/btnCategory"
+            app:layout_constraintTop_toBottomOf="@id/btnOrder"
+            app:layout_constraintVertical_bias="0.035"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnCategory"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="96dp"
+            android:text="Categories"
+            android:textColor="@android:color/white"
+            android:background="@drawable/rounded_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBranch"
+            app:layout_constraintVertical_bias="0.034"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/ivSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:contentDescription="Settings"
+            android:focusable="true"
+            android:src="@android:drawable/ic_menu_manage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/manager"
-        android:textSize="50sp"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@android:color/black"
-         android:textStyle="bold"
-        android:shadowColor="#AA000000"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="5"
-        android:letterSpacing="0.1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.293"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:layout_gravity="bottom"
+        android:background="@android:color/transparent"
+        android:paddingVertical="8dp"
+        android:elevation="0dp"
+        app:itemIconSize="24dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemTextColor="@drawable/item_selector"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/admin_bottom_navigation_menu"
+        android:clipToPadding="false"
+        android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/btnBranch"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="372dp"
-        android:text="Branch"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/rounded_button"
-        app:layout_constraintEnd_toStartOf="@+id/btnOrder"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <Button
-        android:id="@+id/btnOrder"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="372dp"
-        android:text="Order"
-        android:textColor="@android:color/white"
-        android:background="@drawable/rounded_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/btnSnack"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="96dp"
-        android:text="Snack"
-        android:textColor="@android:color/white"
-        android:background="@drawable/rounded_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.59"
-        app:layout_constraintStart_toEndOf="@+id/btnCategory"
-        app:layout_constraintTop_toBottomOf="@id/btnOrder"
-        app:layout_constraintVertical_bias="0.035"
-        tools:ignore="HardcodedText" />
-
-    <Button
-        android:id="@+id/btnCategory"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
-        android:text="Categories"
-        android:textColor="@android:color/white"
-        android:background="@drawable/rounded_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBranch"
-        app:layout_constraintVertical_bias="0.034"
-        tools:ignore="HardcodedText" />
-
-    <ImageView
-        android:id="@+id/ivSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:contentDescription="Settings"
-        android:focusable="true"
-        android:src="@android:drawable/ic_menu_manage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText,TouchTargetSizeCheck" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>

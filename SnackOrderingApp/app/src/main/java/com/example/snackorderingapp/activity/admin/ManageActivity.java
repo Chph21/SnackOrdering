@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.snackorderingapp.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ManageActivity extends AppCompatActivity {
 
@@ -25,7 +26,19 @@ public class ManageActivity extends AppCompatActivity {
             return insets;
         });
 
-
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_manage);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.nav_manage:
+                    return true;
+                case R.id.nav_admin_profile:
+                    startActivity(new Intent(getApplicationContext(), AdminProfileActivity.class));
+                    finish();
+                    return true;
+            }
+            return false;
+        });
 
         // Find the buttons by their IDs
         Button btnBranch = findViewById(R.id.btnBranch);
@@ -35,7 +48,7 @@ public class ManageActivity extends AppCompatActivity {
 
         btnBranch.setOnClickListener(v -> {
             // Navigate to BranchActivity
-            Intent intent = new Intent(ManageActivity.this, ManageBranchActivity.class);
+            Intent intent = new Intent(ManageActivity.this, ManageUserActivity.class);
             startActivity(intent);
         });
 

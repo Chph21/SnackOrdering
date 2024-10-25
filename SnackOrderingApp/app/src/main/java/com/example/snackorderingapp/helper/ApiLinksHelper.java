@@ -37,6 +37,9 @@ public class ApiLinksHelper {
     public static String getOrdersUri() {
         return BASE_URL + "order";
     }
+    public static String getCategoriesUri() {return BASE_URL +"category";}
+    public static String saveCategoryUri(){return BASE_URL +"category";}
+    public static String deleteCategoryUri(){return BASE_URL +"category";}
     public static String getUserByIdUri(Integer userId) {
         return BASE_URL + "account/" + userId;
     }
@@ -47,6 +50,12 @@ public class ApiLinksHelper {
 
     public static String getOrderDetailsUri() {
         return BASE_URL + "orderDetail";
+    }
+    public static String getUsersUri() {
+        return BASE_URL + "account";
+    }
+    public static String updateUserUri() {
+        return BASE_URL + "account";
     }
 }
 // END OF API LINKS HELPER CLASS.
