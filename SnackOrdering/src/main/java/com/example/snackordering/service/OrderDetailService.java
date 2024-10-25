@@ -89,6 +89,7 @@ public class OrderDetailService {
         orderDetail.setOrder(order);
         orderDetail.setBranchFood(branchFood);
         orderDetail.setCreatedBy(authentication.getName());
+        orderDetail.setUpdatedBy(authentication.getName());
         return orderDetail;
     }
 

@@ -1,9 +1,10 @@
 package com.example.snackorderingapp.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Snack {
+public class Snack implements Serializable {
 
     private Integer foodId;
 

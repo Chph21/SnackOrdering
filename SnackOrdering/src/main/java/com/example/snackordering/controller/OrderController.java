@@ -40,6 +40,14 @@ public class OrderController {
                 "Object fetched successfully");
     }
 
+    @GetMapping("/account/{id}")
+    public ResponseEntity<ResponseDTO> getByAccountId(@PathVariable Integer id) {
+        List<OrderResponse> result = orderService.findByAccountId(id);
+        return ResponseUtil.getObject(result,
+                HttpStatus.OK,
+                "Object fetched successfully");
+    }
+
     @PutMapping
     public ResponseEntity<ResponseDTO> update(@Valid @RequestBody OrderRequest request) {
         OrderResponse result = orderService.save(request);

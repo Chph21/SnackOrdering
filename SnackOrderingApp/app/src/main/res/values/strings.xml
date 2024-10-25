@@ -20,4 +20,12 @@
     <string name="price">Price</string>
     <string name="manage_branch">manage branch</string>
     <string name="manage_snack">manage snack</string>
+    <string name="edit" />
+    <string name="content_description_search" />
+    <string name="favorite" />
+    <string name="content_description_favorite" />
+    <string name="more" />
+    <string name="content_description_more" />
+    <string name="textLabel">Ăn vặt Sài Gòn</string>
+    <string name="textFavorites">Các món phổ biến</string>
 </resources>

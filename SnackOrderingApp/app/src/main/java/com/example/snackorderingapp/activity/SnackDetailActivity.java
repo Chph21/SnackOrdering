@@ -1,21 +1,25 @@
 package com.example.snackorderingapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.snackorderingapp.R;
 import com.example.snackorderingapp.model.Snack;
-//import com.squareup.picasso.Picasso;
-
-import java.util.Date;
+import com.example.snackorderingapp.utils.CartUtils;
+import com.squareup.picasso.Picasso;
 
 public class SnackDetailActivity extends AppCompatActivity {
-    private ImageView snackImageView;
-    private TextView snackNameTextView;
-    private TextView snackDescriptionTextView;
-    private TextView snackPriceTextView;
+
+    private ImageView snackImage;
+    private TextView snackName, snackDescription, snackPrice;
+    private EditText snackAmount;
     private Button addToCartButton;
 
     @Override
@@ -23,52 +27,37 @@ public class SnackDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snack_detail);
 
-        // Initialize UI elements
-        snackImageView = findViewById(R.id.snackImageView);
-        snackNameTextView = findViewById(R.id.snackNameTextView);
-        snackDescriptionTextView = findViewById(R.id.snackDescriptionTextView);
-        snackPriceTextView = findViewById(R.id.snackPriceTextView);
+        snackImage = findViewById(R.id.snackImage);
+        snackName = findViewById(R.id.snackName);
+        snackDescription = findViewById(R.id.snackDescription);
+        snackPrice = findViewById(R.id.snackPrice);
+        snackAmount = findViewById(R.id.snackAmount);
         addToCartButton = findViewById(R.id.addToCartButton);
 
-        // Get snack details from intent
-        int snackId = getIntent().getIntExtra("SNACK_ID", -1);
+        // Get the snack data from the intent
+        Intent intent = getIntent();
+        Snack snack = (Snack) intent.getSerializableExtra("snack");
 
-        // Load and display snack details
-        loadSnackDetails(snackId);
-    }
-
-    private void loadSnackDetails(int snackId) {
-        // For demonstration, let's assume we have a method to get a snack by its ID
-        // In a real application, this would likely involve a network request
-        Snack snack = getSnackById(snackId);
-
+        // Set the snack data to the views
         if (snack != null) {
-            // Load image using Picasso or any other image loading library
-//            Picasso.get().load(snack.getImageURL()).into(snackImageView);
-
-            // Set text views with snack details
-            snackNameTextView.setText(snack.getFoodName());
-            snackDescriptionTextView.setText(snack.getDescription());
-            snackPriceTextView.setText(String.format("$%.2f", snack.getPrice()));
+            snackName.setText(String.format("Tên: %s", snack.getFoodName()));
+            snackDescription.setText(String.format("Mô tả: %s", snack.getDescription()));
+            snackPrice.setText(String.format("Giá: %s", snack.getPrice()));
+            // Picasso.get().load(snack.getImageURL()).into(snackImage);
         }
-    }
 
-    private Snack getSnackById(int snackId) {
-        // This is a placeholder method. Replace it with actual data fetching logic.
-        // For now, returning a dummy snack object.
-        return new Snack(
-                snackId,
-                "Sample Snack",
-                "https://example.com/image.jpg",
-                "This is a sample description.",
-                "Sample ingredients",
-                9.99,
-                true,
-                "Sample category",
-                "Sample creator",
-                new Date(),
-                "Sample updater",
-                new Date()
-        );
+        addToCartButton.setOnClickListener(v -> {
+            // Add the snack to the cart
+            if (snack != null) {
+                String amountStr = snackAmount.getText().toString();
+                if (!amountStr.isEmpty()) {
+                    int amount = Integer.parseInt(amountStr);
+                    CartUtils.addToCart(SnackDetailActivity.this, snack, amount);
+                    Toast.makeText(SnackDetailActivity.this, snack.getFoodName() + " added to cart", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SnackDetailActivity.this, "Please enter an amount", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
