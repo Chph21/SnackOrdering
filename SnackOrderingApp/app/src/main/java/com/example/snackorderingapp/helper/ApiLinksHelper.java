@@ -34,7 +34,9 @@ public class ApiLinksHelper {
     public static String getOrdersUri() {
         return BASE_URL + "order";
     }
-
+    public static String getCategoriesUri() {return BASE_URL +"category";}
+    public static String saveCategoryUri(){return BASE_URL +"category";}
+    public static String deleteCategoryUri(){return BASE_URL +"category";}
     public static String getUserByIdUri(Integer userId) {
         return BASE_URL + "account/" + userId;
     }
