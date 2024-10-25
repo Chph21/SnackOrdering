@@ -49,6 +49,16 @@ public class OrderService {
         return order.map(this::orderResponseGenerator).get();
     }
 
+    public List<OrderResponse> findByAccountId(Integer id) {
+        LOGGER.info("Find order with account id " + id);
+        List<Order> orders = orderRepository.findAllByAccount_AccountId(Long.valueOf(id));
+        if (orders.isEmpty()) {
+            LOGGER.warn("No order was found!");
+            return null;
+        }
+        return orders.stream().map(this::orderResponseGenerator).toList();
+    }
+
     public OrderResponse save(OrderRequest orderRequest) {
         Order order;
         Optional<Branch> branch = branchRepository.findById(orderRequest.getBranchId());

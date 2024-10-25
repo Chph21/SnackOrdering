@@ -20,6 +20,8 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
 swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+gson = "com.google.code.gson:gson:2.11.0"
+picasso = "com.squareup.picasso:picasso:2.71828"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

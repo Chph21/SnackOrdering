@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.apply();
                         System.out.println(role);
                         if (role.equals("USER")) {
-                            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                         } else if (role.equals("ADMIN")) {
