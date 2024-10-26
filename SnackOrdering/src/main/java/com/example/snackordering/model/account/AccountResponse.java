@@ -36,4 +36,8 @@ public class AccountResponse {
     private String updatedBy;
 
     private LocalDateTime updatedDate;
+
+    private double latitude;
+
+    private double longitude;
 }

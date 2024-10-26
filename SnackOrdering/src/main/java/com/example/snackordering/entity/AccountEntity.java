@@ -43,6 +43,12 @@ public class AccountEntity {
     @Column(name = "address", length = 20)
     private String address;
 
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
+
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "branch_id", unique = true)
     private Branch branch;
