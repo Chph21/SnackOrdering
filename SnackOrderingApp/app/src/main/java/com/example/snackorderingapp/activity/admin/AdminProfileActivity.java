@@ -32,7 +32,7 @@ import java.util.Objects;
 public class AdminProfileActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     private RequestQueue mRequestQueue;
-    private TextView txtPhone, txtEmail, txtFullname, txtAddress;
+    private TextView txtPhone, txtEmail, txtFullname, txtLatitude, txtLongitude;
     private Button logoutBtn;
     private Button updateBtn;
     private Button cancelBtn;
@@ -65,7 +65,8 @@ public class AdminProfileActivity extends AppCompatActivity {
         txtPhone = findViewById(R.id.txt_phone);
         txtEmail = findViewById(R.id.txt_email);
         txtFullname = findViewById(R.id.txt_fullname);
-        txtAddress = findViewById(R.id.txt_address);
+        txtLatitude = findViewById(R.id.txt_latitude);
+        txtLongitude = findViewById(R.id.txt_longitude);
         logoutBtn = findViewById(R.id.logout_btn);
         updateBtn = findViewById(R.id.update_btn);
         cancelBtn = findViewById(R.id.cancel_btn);
@@ -124,7 +125,8 @@ public class AdminProfileActivity extends AppCompatActivity {
                         txtPhone.setText(content.getString("phone"));
                         txtEmail.setText(content.isNull("email") ? "Chưa cung cấp" : content.getString("email"));
                         txtFullname.setText(content.getString("firstName") + " " + content.getString("lastName"));
-                        txtAddress.setText(content.isNull("address") ? "Chưa cung cấp" : content.getString("address"));
+                        txtLongitude.setText(content.isNull("longtitude") ? " " : String.valueOf(content.getDouble("longtitude")));
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(AdminProfileActivity.this, "Error parsing user info", Toast.LENGTH_SHORT).show();
@@ -160,7 +162,8 @@ public class AdminProfileActivity extends AppCompatActivity {
         txtPhone.setEnabled(false);
         txtEmail.setEnabled(editable);
         txtFullname.setEnabled(editable);
-        txtAddress.setEnabled(editable);
+        txtLongitude.setEnabled(editable);
+        txtLatitude.setEnabled(editable);
     }
 
     private void updateUserInfo() {
@@ -173,7 +176,12 @@ public class AdminProfileActivity extends AppCompatActivity {
             requestBody.put("lastName", fullName.length > 1 ? fullName[1] : "");
             requestBody.put("email", txtEmail.getText().toString());
             requestBody.put("phone", currentUser.getPhone());
-            requestBody.put("address", txtAddress.getText().toString());
+            String latitudeText = txtLatitude.getText().toString();
+            double latitude = latitudeText.isEmpty() ? 0.0 : Double.parseDouble(latitudeText);
+            requestBody.put("latitude", latitude);
+            String longitudeText = txtLongitude.getText().toString();
+            double longitude = longitudeText.isEmpty() ? 0.0 : Double.parseDouble(longitudeText);
+            requestBody.put("longitude", longitude);
         } catch (JSONException e) {
             e.printStackTrace();
             return;
