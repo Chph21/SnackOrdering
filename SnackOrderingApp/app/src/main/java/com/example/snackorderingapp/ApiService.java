@@ -1,10 +1,14 @@
 package com.example.snackorderingapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.snackorderingapp.helper.StringResourceHelper;
+import com.example.snackorderingapp.model.Category;
 import com.example.snackorderingapp.model.Snack;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +26,7 @@ public class ApiService {
     private static final String BASE_URL = "http://10.0.2.2:8080/";
     private MyVolleySingletonUtil volleySingleton;
     private String accessToken;
+
 
     public ApiService(Context context, String accessToken) {
         this.volleySingleton = MyVolleySingletonUtil.getInstance(context);
@@ -120,6 +125,7 @@ public class ApiService {
 
         volleySingleton.addToRequestQueue(request);
     }
+
 
     // Other methods (getSnackDetails, placeOrder, getOrderHistory) remain the same
     // ...

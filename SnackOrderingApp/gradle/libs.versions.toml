@@ -24,6 +24,8 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
 swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+gson = "com.google.code.gson:gson:2.11.0"
+picasso = "com.squareup.picasso:picasso:2.71828"
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 
 [plugins]

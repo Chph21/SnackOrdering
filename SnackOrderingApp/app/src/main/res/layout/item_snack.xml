@@ -1,17 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/snackNameTextView"
-        android:layout_width="wrap_content"
+    <!-- Image of Snack -->
+    <ImageView
+        android:id="@+id/snackImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/tomhapbia"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Snack Details -->
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <!-- Snack Name -->
+        <TextView
+            android:id="@+id/snackName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000000"/>
+
+        <!-- Rating and Veg Label -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <!-- Star Icon -->
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_star"
+                app:tint="#FFC107" />
+
+            <!-- Rating -->
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.0"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"/>
+
+            <!-- Price Label -->
+            <TextView
+                android:id="@+id/snackPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:background="#4CAF50"
+                android:padding="4dp"/>
+        </LinearLayout>
+
+        <!-- Delivery Time -->
+        <TextView
+            android:id="@+id/deliveryTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15 min"
+            android:textSize="14sp"
+            android:textColor="#808080"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+
+</LinearLayout>
