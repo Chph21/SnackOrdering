@@ -33,6 +33,8 @@ public class SnackOrderingApplication implements CommandLineRunner {
                     .lastName("Admin")
                     .email(adminEmail)
                     .phone("+84123456789")
+                    .latitude(10.748938998231315)
+                    .longitude(106.63575835177598)
                     .build();
 
             AuthEntity auth = AuthEntity.builder()
@@ -51,31 +53,31 @@ public class SnackOrderingApplication implements CommandLineRunner {
         } else {
             System.out.println("Admin account already exists.");
         }
-        String userEmail = "user@gmail.com";
-        if (accountRepository.findByEmail(userEmail).isEmpty()) {
-            AccountEntity account = AccountEntity.builder()
-                    .firstName("User")
-                    .lastName("User")
-                    .email(userEmail)
-                    .phone("+84987654321")
-                    .build();
-
-            AuthEntity auth = AuthEntity.builder()
-                    .phone("+84987654321")
-                    .password(passwordEncoder.encode("user"))
-                    .role(AccountRole.USER)
-                    .isEnable(true)
-                    .isBlocked(false)
-                    .account(account)
-                    .build();
-            account.setAuth(auth);
-
-            accountRepository.save(account);
-            authRepository.save(auth);
-            System.out.println("User account created.");
-        } else {
-            System.out.println("User account already exists.");
-        }
+//        String userEmail = "user@gmail.com";
+//        if (accountRepository.findByEmail(userEmail).isEmpty()) {
+//            AccountEntity account = AccountEntity.builder()
+//                    .firstName("User")
+//                    .lastName("User")
+//                    .email(userEmail)
+//                    .phone("+84987654321")
+//                    .build();
+//
+//            AuthEntity auth = AuthEntity.builder()
+//                    .phone("+84987654321")
+//                    .password(passwordEncoder.encode("user"))
+//                    .role(AccountRole.USER)
+//                    .isEnable(true)
+//                    .isBlocked(false)
+//                    .account(account)
+//                    .build();
+//            account.setAuth(auth);
+//
+//            accountRepository.save(account);
+//            authRepository.save(auth);
+//            System.out.println("User account created.");
+//        } else {
+//            System.out.println("User account already exists.");
+//        }
     }
 
 }
