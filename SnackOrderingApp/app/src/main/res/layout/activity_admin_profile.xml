@@ -5,30 +5,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.admin.AdminProfileActivity">
+    tools:context=".activity.ProfileActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="24dp">
 
-
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/profile_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Thông tin cá nhân"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="24dp"
-                android:layout_marginTop="36dp"/>
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="24dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_phone_layout"
@@ -44,9 +44,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="48dp"
-                    tools:ignore="RtlSymmetry"
                     android:hint="Số điện thoại"
-                    android:inputType="phone" />
+                    android:inputType="phone"
+                    tools:ignore="RtlSymmetry" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -64,8 +64,8 @@
                     android:layout_height="wrap_content"
                     android:hint="Email"
                     android:paddingStart="48dp"
-                    tools:ignore="RtlSymmetry"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    tools:ignore="RtlSymmetry" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -83,12 +83,12 @@
                     android:layout_height="wrap_content"
                     android:hint="Họ và tên"
                     android:paddingStart="48dp"
-                    tools:ignore="RtlSymmetry"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    tools:ignore="RtlSymmetry" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txt_address_layout"
+                android:id="@+id/txt_longitude_layout"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,24 +97,44 @@
                 app:layout_constraintTop_toBottomOf="@id/txt_fullname_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_address"
+                    android:id="@+id/txt_longitude"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Địa chỉ"
+                    android:hint="Kinh Độ"
+                    android:inputType="textPostalAddress"
                     android:paddingStart="48dp"
-                    tools:ignore="RtlSymmetry"
-                    android:inputType="textPostalAddress" />
+                    tools:ignore="RtlSymmetry" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_latitude_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:startIconDrawable="@drawable/ic_location"
+                app:layout_constraintTop_toBottomOf="@id/txt_longitude_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_latitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Vĩ độ"
+                    android:inputType="textPostalAddress"
+                    android:paddingStart="48dp"
+                    tools:ignore="RtlSymmetry" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/update_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:padding="12dp"
                 android:text="Cập nhật thông tin"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@id/txt_address_layout" />
+                app:layout_constraintTop_toBottomOf="@id/txt_latitude_layout"
+                tools:layout_editor_absoluteX="24dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_btn"
@@ -133,11 +153,12 @@
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:padding="12dp"
                 android:text="Đăng xuất"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@id/cancel_btn" />
+                app:layout_constraintTop_toBottomOf="@id/cancel_btn"
+                tools:layout_editor_absoluteX="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -152,7 +173,6 @@
         app:itemIconSize="32dp"
         app:itemIconTint="@drawable/item_selector"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/admin_bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-

@@ -112,6 +112,8 @@ public class AccountService {
         account.setBirthday(request.getBirthday());
         account.setEmail(request.getEmail());
         account.setUpdatedBy(authentication.getName());
+        account.setLongitude(request.getLongitude());
+        account.setLatitude(request.getLatitude());
     }
 
     private AccountResponse accountResponseGenerator(AccountEntity account) {
@@ -127,6 +129,8 @@ public class AccountService {
         accountResponse.setCreatedDate(account.getCreatedDate());
         accountResponse.setUpdatedDate(account.getUpdatedDate());
         accountResponse.setUpdatedBy(account.getUpdatedBy());
+        accountResponse.setLatitude(account.getLatitude());
+        accountResponse.setLongitude(account.getLongitude());
         return accountResponse;
     }
 

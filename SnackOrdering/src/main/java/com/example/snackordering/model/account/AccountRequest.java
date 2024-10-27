@@ -34,6 +34,10 @@ public class AccountRequest {
 
     private String address;
 
+    private double latitude;
+
+    private double longitude;
+
     private Integer branchId;
 
     private LocalDate birthday;

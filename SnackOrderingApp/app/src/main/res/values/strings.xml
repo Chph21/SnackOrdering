@@ -28,4 +28,5 @@
     <string name="content_description_more" />
     <string name="textLabel">Ăn vặt Sài Gòn</string>
     <string name="textFavorites">Các món phổ biến</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

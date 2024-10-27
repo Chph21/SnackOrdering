@@ -9,6 +9,8 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String address;
+    private double longitude;
+    private double latitude;
     private Long branchId;
     private String birthday;
     private String createdBy;
@@ -31,6 +33,7 @@ public class User implements Serializable {
         this.createdDate = createdDate;
         this.updatedBy = updatedBy;
         this.updatedDate = updatedDate;
+
     }
 
     public User() {
@@ -50,6 +53,22 @@ public class User implements Serializable {
     public String getCreatedDate() { return createdDate; }
     public String getUpdatedBy() { return updatedBy; }
     public String getUpdatedDate() { return updatedDate; }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 
     // Setters
     public void setAccountId(Long accountId) { this.accountId = accountId; }
