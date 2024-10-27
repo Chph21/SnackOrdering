@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -40,20 +41,50 @@ public class FoodController {
                 "Object fetched successfully");
     }
 
-    @PutMapping
-    public ResponseEntity<ResponseDTO> update(@Valid @RequestBody FoodRequest request) {
-        FoodResponse result = foodService.save(request);
+    @PutMapping(consumes = "multipart/form-data")
+    public ResponseEntity<ResponseDTO> update(
+            @RequestParam("foodName") String foodName,
+            @RequestParam("description") String description,
+            @RequestParam("price") double price,
+            @RequestParam("categoryId") Integer categoryId,
+            @RequestParam("ingredients") String ingredients,
+            @RequestParam("isAvailable") boolean isAvailable,
+            @RequestParam("image") MultipartFile image) {
+
+        FoodRequest request = new FoodRequest();
+        request.setFoodName(foodName);
+        request.setDescription(description);
+        request.setPrice(price);
+        request.setCategoryId(categoryId);
+        request.setIngredients(ingredients);
+        request.setAvailable(isAvailable);
+
+        FoodResponse result = foodService.save(request, image);
         return ResponseUtil.getObject(result,
                 HttpStatus.OK,
                 "Object updated successfully");
     }
 
-    @PostMapping
-    public ResponseEntity<ResponseDTO> create(@Valid @RequestBody FoodRequest request) {
-        FoodResponse result = foodService.save(request);
-        return ResponseUtil.getObject(result,
-                HttpStatus.CREATED,
-                "Object created successfully");
+    @PostMapping(consumes = "multipart/form-data")
+    public ResponseEntity<ResponseDTO> create(
+            @RequestParam("foodName") String foodName,
+            @RequestParam("description") String description,
+            @RequestParam("price") double price,
+            @RequestParam("categoryId") Integer categoryId,
+            @RequestParam("ingredients") String ingredients,
+            @RequestParam("isAvailable") boolean isAvailable,
+            @RequestParam("image") MultipartFile image) {
+
+        FoodRequest request = new FoodRequest();
+        request.setFoodName(foodName);
+        request.setDescription(description);
+        request.setPrice(price);
+        request.setCategoryId(categoryId);
+        request.setIngredients(ingredients);
+        request.setAvailable(isAvailable);
+
+        FoodResponse result = foodService.save(request, image);
+        return ResponseUtil.getObject(result, HttpStatus.CREATED, "Object created successfully");
     }
 
     @DeleteMapping("/{id}")
