@@ -121,11 +121,14 @@ public class AdminProfileActivity extends AppCompatActivity {
                         currentUser.setEmail(content.isNull("email") ? null : content.getString("email"));
                         currentUser.setFirstName(content.getString("firstName"));
                         currentUser.setLastName(content.getString("lastName"));
+                        currentUser.setLatitude(content.getDouble("latitude"));
+                        currentUser.setLongitude(content.getDouble("longitude"));
 
                         txtPhone.setText(content.getString("phone"));
                         txtEmail.setText(content.isNull("email") ? "Chưa cung cấp" : content.getString("email"));
                         txtFullname.setText(content.getString("firstName") + " " + content.getString("lastName"));
-                        txtLongitude.setText(content.isNull("longtitude") ? " " : String.valueOf(content.getDouble("longtitude")));
+                        txtLongitude.setText(content.isNull("longitude") ? " " : String.valueOf(content.getDouble("longitude")));
+                        txtLatitude.setText(content.isNull("latitude")? " " : String.valueOf(content.getDouble("latitude")));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -176,6 +179,7 @@ public class AdminProfileActivity extends AppCompatActivity {
             requestBody.put("lastName", fullName.length > 1 ? fullName[1] : "");
             requestBody.put("email", txtEmail.getText().toString());
             requestBody.put("phone", currentUser.getPhone());
+
             String latitudeText = txtLatitude.getText().toString();
             double latitude = latitudeText.isEmpty() ? 0.0 : Double.parseDouble(latitudeText);
             requestBody.put("latitude", latitude);
