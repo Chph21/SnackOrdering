@@ -7,16 +7,22 @@ import com.example.snackordering.model.food.FoodResponse;
 import com.example.snackordering.repository.CategoryRepository;
 import com.example.snackordering.repository.FoodRepository;
 import com.example.snackordering.util.CustomValidationException;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Bucket;
+import com.google.firebase.cloud.StorageClient;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,22 +54,24 @@ public class FoodService {
         return food.map(this::foodResponseGenerator).get();
     }
 
-    public FoodResponse save(FoodRequest foodRequest) {
+    public FoodResponse save(FoodRequest foodRequest, MultipartFile image) {
         Food food;
         Optional<Category> category = categoryRepository.findById(foodRequest.getCategoryId());
         if (category.isEmpty()) {
             throw new CustomValidationException(List.of("No category was found!"));
         }
 
+        String imageUrl = FirebaseService.uploadImageToFirebase(image);
+
         if (foodRequest.getFoodId() != null) {
             LOGGER.info("Update food with id " + foodRequest.getFoodId());
             checkExist(foodRequest.getFoodId());
             food = foodRepository.findById(foodRequest.getFoodId()).get();
-            updateFood(food, foodRequest);
+            updateFood(food, foodRequest, imageUrl);
             foodRepository.save(food);
         } else {
             LOGGER.info("Create new food");
-            food = createFood(foodRequest, category.get());
+            food = createFood(foodRequest, category.get(), imageUrl);
             foodRepository.save(food);
         }
         return foodResponseGenerator(food);
@@ -78,29 +86,29 @@ public class FoodService {
         }
     }
 
-    private Food createFood(FoodRequest request, Category category) {
+    private Food createFood(FoodRequest request, Category category, String imageUrl) {
         Food food = new Food();
-        setCommonFields(food, request);
+        setCommonFields(food, request, imageUrl);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         food.setCreatedBy(authentication.getName());
         food.setCategory(category);
         return food;
     }
 
-    private void updateFood(Food food, FoodRequest request) {
-        setCommonFields(food, request);
+    private void updateFood(Food food, FoodRequest request, String imageUrl) {
+        setCommonFields(food, request, imageUrl);
         Category category = categoryRepository.findById(request.getCategoryId()).get();
         food.setCategory(category);
     }
 
-    private void setCommonFields(Food food, FoodRequest request) {
+    private void setCommonFields(Food food, FoodRequest request, String imageUrl) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         food.setDescription(request.getDescription());
         food.setPrice(request.getPrice());
-        food.setImageURL(request.getImageURL());
+        food.setImageURL(imageUrl);
         food.setIngredients(request.getIngredients());
         food.setFoodName(request.getFoodName());
-        food.setAvailable(!request.isAvailable());
+        food.setAvailable(request.isAvailable());
         food.setUpdatedBy(authentication.getName());
         food.setUpdatedDate(new Date());
     }
