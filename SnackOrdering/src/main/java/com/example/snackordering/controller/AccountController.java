@@ -1,5 +1,6 @@
 package com.example.snackordering.controller;
 
+import com.example.snackordering.model.LocationResponse;
 import com.example.snackordering.model.ResponseModel.ResponseDTO;
 import com.example.snackordering.model.account.AccountRequest;
 import com.example.snackordering.model.account.AccountResponse;
@@ -40,6 +41,13 @@ public class AccountController {
                 "Object fetched successfully");
     }
 
+    @GetMapping("/location")
+    public ResponseEntity<ResponseDTO> getLocation() {
+        LocationResponse result = accountService.findLocation();
+        return ResponseUtil.getObject(result,
+                HttpStatus.OK,
+                "Location fetched successfully");
+    }
     @GetMapping("/phone/{phone}")
     public ResponseEntity<ResponseDTO> getByPhone(@PathVariable String phone) {
         AccountResponse result = accountService.findByPhone(phone);

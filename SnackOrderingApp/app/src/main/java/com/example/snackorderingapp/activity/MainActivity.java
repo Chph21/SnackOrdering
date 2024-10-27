@@ -16,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.snackorderingapp.MyVolleySingletonUtil;
 import com.example.snackorderingapp.R;
+import com.example.snackorderingapp.activity.admin.MapsActivity;
 import com.example.snackorderingapp.adapter.SnackAdapter;
 import com.example.snackorderingapp.helper.ApiLinksHelper;
 import com.example.snackorderingapp.helper.StringResourceHelper;
@@ -76,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.bottom_profile:
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     return true;
+                case R.id.bottom_map:
+                    startActivity(new Intent(getApplicationContext(), MapsActivity.class));
             }
             return false;
         });

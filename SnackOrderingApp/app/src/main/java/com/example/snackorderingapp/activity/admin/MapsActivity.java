@@ -2,8 +2,18 @@ package com.example.snackorderingapp.activity.admin;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.snackorderingapp.ApiService;
+import com.example.snackorderingapp.MyVolleySingletonUtil;
+import com.example.snackorderingapp.helper.ApiLinksHelper;
+import com.example.snackorderingapp.helper.StringResourceHelper;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -12,11 +22,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.snackorderingapp.databinding.ActivityMapsBinding;
 
+import org.json.JSONException;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-
+    private ApiService apiService;
+    private RequestQueue mRequestQueue;
+    private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,14 +59,51 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mRequestQueue = MyVolleySingletonUtil.getInstance(this).getRequestQueue();
+        preferences = getSharedPreferences(StringResourceHelper.getAuthTokenPref(), MODE_PRIVATE);
+        String accessToken = preferences.getString("access_token", "");
 
-        // Define the location with latitude and longitude
-        LatLng saigon = new LatLng(10.748938998231315, 106.63575835177598);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, ApiLinksHelper.getLocationUri(), null,
+                response -> {
+                    try {
+                        // Parse the latitude and longitude from the JSON object
+                        double latitude = response.getJSONObject("content").getDouble("latitude");
+                        double longitude = response.getJSONObject("content").getDouble("longitude");
 
-        // Add a marker at this location
-        mMap.addMarker(new MarkerOptions().position(saigon).title("Marker in Sai Gon"));
+                        // Check if mMap is not null before adding a marker
+                        if (mMap != null) {
+                            LatLng location = new LatLng(latitude, longitude);
+                            mMap.addMarker(new MarkerOptions().position(location).title("Fetched Location"));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+                        } else {
+                            Log.e("MapsActivity", "GoogleMap instance is null.");
+                        }
 
-        // Move the camera to the location with a zoom level for street view
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(saigon, 15));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Error parsing location data", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    if (error.networkResponse != null && error.networkResponse.statusCode == 403) {
+                        Toast.makeText(this, "Error 403 loading location", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Error loading location", Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        // Add the request to the request queue
+        mRequestQueue.add(request);
     }
+
+
+
 }

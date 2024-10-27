@@ -38,6 +38,7 @@ public class ApiLinksHelper {
         return BASE_URL + "order";
     }
     public static String getCategoriesUri() {return BASE_URL +"category";}
+    public static String getLocationUri (){return BASE_URL +"account/location";}
     public static String saveCategoryUri(){return BASE_URL +"category";}
     public static String deleteCategoryUri(){return BASE_URL +"category";}
     public static String getUserByIdUri(Integer userId) {

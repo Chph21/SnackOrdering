@@ -2,6 +2,7 @@ package com.example.snackordering.service;
 
 import com.example.snackordering.entity.AccountEntity;
 import com.example.snackordering.entity.Branch;
+import com.example.snackordering.model.LocationResponse;
 import com.example.snackordering.model.account.AccountRequest;
 import com.example.snackordering.model.account.AccountResponse;
 import com.example.snackordering.repository.AccountRepository;
@@ -25,7 +26,7 @@ public class AccountService {
     private final Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
     private final AccountRepository accountRepository;
     private final BranchRepository branchRepository;
-
+    private static final Long ADMIN_ID = 1L;
     public List<AccountResponse> findAll() {
         LOGGER.info("Find all accounts");
         List<AccountEntity> accounts = accountRepository.findAll();
@@ -36,6 +37,19 @@ public class AccountService {
         return accounts.stream()
                 .map(this::accountResponseGenerator)
                 .collect(Collectors.toList());
+    }
+
+    public LocationResponse findLocation() {
+        LOGGER.info("Find location");
+        AccountEntity account = accountRepository.findByAccountId(ADMIN_ID);
+        if (account == null) {
+            LOGGER.warn("No location was found!");
+            return null;
+        }
+        LocationResponse locationResponse = new LocationResponse();
+        locationResponse.setLatitude(account.getLatitude());
+        locationResponse.setLongitude(account.getLongitude());
+        return locationResponse;
     }
 
     public AccountResponse findById(Long id) {
