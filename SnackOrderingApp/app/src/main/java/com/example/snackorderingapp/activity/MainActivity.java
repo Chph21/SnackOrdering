@@ -72,13 +72,6 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("ACCESS_TOKEN", accessToken);
             startActivity(intent);
         });
-
-        //ggmap
-        Button ggMapButton = findViewById(R.id.mapButton);
-        ggMapButton.setOnClickListener(v -> {
-
-        });
-
     }
 
     @Override

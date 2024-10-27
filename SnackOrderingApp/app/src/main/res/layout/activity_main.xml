@@ -50,17 +50,6 @@
         android:layout_marginBottom="16dp" />
 
     <Button
-        android:id="@+id/mapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Map"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintEnd_toStartOf="@+id/cartButton"
-        app:layout_constraintHorizontal_bias="0.422"
-        app:layout_constraintStart_toEndOf="@+id/allSnacksButton" />
-
-    <Button
         android:id="@+id/cartButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
